@@ -1,0 +1,25 @@
+{% extends 'department/base.html'%}
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<div class="block">
+    <ul class="info">
+        {% for g in general %}
+        <div class="title">
+            {% if g.photo %}
+            <img src="{{ g.photo.url }}" alt="" class="title-img">
+            {% endif %}
+            <p><b>Заведующая кафедрой: <br></b> {{g.title}}</p>
+            <p><b>Адрес: <br></b> {{g.address}}</p>
+            <p><b>Телефон: </b> {{g.phone}}</p>
+            <p>{{ g.content | safe | linebreaks }}</p>
+            {% endfor %}
+        </div>
+    </ul>
+    {% include 'department/includes/post_news.html' %}
+
+</div>
+
+
+{% endblock %}

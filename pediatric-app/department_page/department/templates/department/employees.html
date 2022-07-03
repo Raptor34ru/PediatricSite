@@ -1,0 +1,22 @@
+{% extends 'department/base.html'%}
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<div>
+    {% for e in employ %}
+    <div class="card">
+        <img src={{e.photo.url}} alt="Avatar">
+        <div class="container">
+            <h4>{{e.name}}</h4>
+            <p>Должность: {{e.job_title}}</p>
+            <p>Образование: {{e.education}}</p>
+            <p>Телефон: {{e.phone}}</p>
+            <p>E-mail: {{e.email}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}

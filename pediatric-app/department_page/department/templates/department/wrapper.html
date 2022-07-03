@@ -1,0 +1,91 @@
+{% extends "department/base.html" %}
+
+{%block content%}
+    {%if request.path|slice:'20:' == '/teachers/'%}
+      <h1>Расписание преподавателя {{request.path|cut:"/teachers/"}}</h1>
+    {%else%}
+      <h1>Расписание для группы {{request.path|cut:"/timetables/"}}</h1>
+    {%endif%}
+
+
+    <div>
+      <h3>Понедельник / <a id = "Monday"></a></h3>
+      {%for post in object_list%}
+          {%if post.day_of_week == '1Понедельник' and post.Group_user == request.path|cut:"/timetables/" %}
+            {%include "department/includes/include_schedule.html"%}
+          {%endif%}
+      {%endfor%}
+    </div>
+    <div>
+        <h3>Вторник / <a id = "Tuesday"></a></h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '2Вторник' and post.Group_user == request.path|cut:"/timetables/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+    </div>
+    <div>
+        <h3>Среда / <a id = "Wednesday"></a></h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '3Среда' and post.Group_user == request.path|cut:"/timetables/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+    </div>
+    <div>
+        <h3>Четверг / <a id = "Thursday"></a></h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '4Четверг' and post.Group_user == request.path|cut:"/timetables/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+    </div>
+    <div>
+        <h3>Пятница / <a id = "Friday"></a></h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '5Пятница' and post.Group_user == request.path|cut:"/timetables/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+
+    </div>
+    <div>
+        <h3>Суббота / <a id = "Saturday"></a></h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '6 Суббота' and post.Group_user == request.path|cut:"/timetables/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+    </div>
+
+    <script>
+      function current_day(x)
+      {
+          var Cur = new Date();
+          Cur.setDate(Cur.getDate() + x);
+          alert( Cur.getDay());
+      }
+
+
+      function getDayInWeek (week,day,year) {
+        var w = week || 1, n = day || 1, y = year || new Date().getFullYear();
+        var d = new Date(y , 0, 7 * w);
+        d.setDate(d.getDate() - (d.getDay() || 7) + n);
+        return (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) + '.' + (d.getMonth() < 10 ? '0' + (d.getMonth() + 1) : d.getMonth()) + '.' +(d.getFullYear());
+      }
+
+      Date.prototype.getWeek = function() {
+          var onejan = new Date(this.getFullYear(), 0, 1);
+          return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+      }
+
+      var weekNumber = (new Date()).getWeek();
+
+      document.getElementById("Monday").innerHTML = getDayInWeek(weekNumber - 1, 1, new Date().getFullYear());
+      document.getElementById("Tuesday").innerHTML = getDayInWeek(weekNumber - 1, 2, new Date().getFullYear());
+      document.getElementById("Wednesday").innerHTML = getDayInWeek(weekNumber - 1, 3, new Date().getFullYear());
+      document.getElementById("Thursday").innerHTML = getDayInWeek(weekNumber - 1, 4, new Date().getFullYear());
+      document.getElementById("Friday").innerHTML = getDayInWeek(weekNumber - 1, 5, new Date().getFullYear());
+      document.getElementById("Saturday").innerHTML = getDayInWeek(weekNumber - 1, 6, new Date().getFullYear());
+    </script>
+{%endblock%}

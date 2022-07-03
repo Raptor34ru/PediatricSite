@@ -1,0 +1,28 @@
+{%block content%}
+
+    <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+            <h3 class="mb-0">{{post.Subject}}</h3>
+            <div class="mb-1 text-muted">Преподаватель: {{post.Teacher}}</div>
+            <p class="card-text mb-auto">{{post.day_of_week|cut:"1"|cut:"2"|cut:"3"|cut:"4"|cut:"5"|cut:"6"|cut:"7"|cut:"8"}}</p>
+            <a class="stretched-link">Аудитория: {{post.Classes}}</a>
+            {%if post.time_of_day == '1'%}
+                <p>8:30 - 10:00</p>
+            {%elif post.time_of_day == '2'%}
+                <p>10:10 - 11:40</p>
+            {%elif post.time_of_day == '3'%}
+                <p>11:50 - 13:20</p>
+            {%elif post.time_of_day == '4'%}
+                <p>13:50 - 15:20</p>
+            {%elif post.time_of_day == '5'%}
+                <p>15:30 - 17:00</p>
+            {%elif post.time_of_day == '6'%}
+                <p>17:10 - 18:40</p>
+            {%endif%}
+            <p>{{post.type_of_week}} </p>
+        </div>
+        </div>
+    </div>
+
+{%endblock%}

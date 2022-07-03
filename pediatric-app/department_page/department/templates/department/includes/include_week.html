@@ -1,0 +1,10 @@
+{%block content%}
+
+    <h3>Вторник </h3>
+        {%for post in object_list%}
+            {%if post.day_of_week == '2Вторник' and post.Group_user == request.path|cut:"/groups/"%}
+              {%include "department/includes/include_schedule.html"%}
+            {%endif%}
+        {%endfor%}
+
+{%endblock%}
